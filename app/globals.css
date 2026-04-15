@@ -7,13 +7,13 @@
 }
 
 :root {
-  --bg: #0e0e0e;
+  --bg: #28396c;
   --text: #d4cfc8;
   --muted: #5a5550;
   --accent: #b8465b;
   --accent-hover: #d4586e;
-  --border: #252220;
-  --input-bg: #1a1816;
+  --border: #354a7a;
+  --input-bg: #1e2d54;
   --success: #7a9e6e;
 }
 
