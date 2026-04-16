@@ -47,28 +47,29 @@ export default function Home() {
         <ellipse cx="112" cy="277" rx="22" ry="4" fill="none" stroke="#cf4647" strokeWidth="1.5"/>
       </svg>
 
-      <h1
-        style={{
-          fontFamily: "Verdana, Geneva, sans-serif",
-          fontSize: "24px",
-          fontWeight: "bold",
-          letterSpacing: "-0.02em",
-          marginBottom: "4px",
-          textAlign: "center",
-          color: "var(--text)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-        }}
-      >
-        daddysomm
-        <svg viewBox="0 0 24 32" width="18" height="24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="3" rx="1" fill="#cf4647"/>
-          <rect x="10" y="5" width="4" height="8" fill="#cf4647"/>
-          <path d="M 12,13 Q 7,15 12,18 Q 17,20 12,23 Q 7,25 12,28" fill="none" stroke="#cf4647" strokeWidth="1.8" strokeLinecap="round"/>
-        </svg>
-      </h1>
+     <h1
+  style={{
+    fontFamily: "Verdana, Geneva, sans-serif",
+    fontSize: "24px",
+    fontWeight: "bold",
+    letterSpacing: "-0.02em",
+    marginBottom: "4px",
+    textAlign: "center",
+    color: "var(--text)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+  }}
+>
+  daddy
+  <svg viewBox="0 0 24 32" width="16" height="22" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="20" height="3" rx="1" fill="#cf4647"/>
+    <rect x="10" y="5" width="4" height="8" fill="#cf4647"/>
+    <path d="M 12,13 Q 7,15 12,18 Q 17,20 12,23 Q 7,25 12,28" fill="none" stroke="#cf4647" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+  somm
+</h1>
 
       <p
         style={{
