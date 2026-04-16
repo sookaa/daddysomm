@@ -86,7 +86,7 @@ export default function Home() {
         <SignupForm
           endpoint="/api/newsletter"
           label="The Newsletter"
-          sublabel="Notes on wine. No scores, no gatekeeping."
+          sublabel="Notes on and aboutwine. No scores, no gatekeeping."
           buttonText="subscribe"
           successMessage="You're in. Check your inbox."
         />
@@ -102,7 +102,7 @@ export default function Home() {
           endpoint="/api/wine-cases"
           label="Wine Case Drops"
           sublabel="Curated cases, a few times a year. This list gets first dibs."
-          buttonText="notify me"
+          buttonText="imbibe"
           successMessage="You'll hear from me when the next case drops (it's coming soon)."
         />
       </div>
