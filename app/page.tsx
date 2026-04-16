@@ -16,7 +16,7 @@ const GLASS = `   _______
       |
       |
       |
-    ___|___
+              ___|___
   /       \\`;
 
 export default function Home() {
