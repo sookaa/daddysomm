@@ -41,13 +41,13 @@ export default function SignupForm({
   };
 
   return (
-    <div style={{ marginBottom: "2.5rem" }}>
+    <div style={{ marginBottom: "1.75rem" }}>
       <div
         style={{
-          fontFamily: '"Fraunces", serif',
-          fontSize: "1.1rem",
-          fontWeight: 600,
-          marginBottom: "0.25rem",
+          fontFamily: "Verdana, Geneva, sans-serif",
+          fontSize: "14px",
+          fontWeight: "bold",
+          marginBottom: "3px",
           color: "var(--text)",
         }}
       >
@@ -55,9 +55,9 @@ export default function SignupForm({
       </div>
       <div
         style={{
-          fontSize: "0.9rem",
+          fontSize: "11px",
           color: "var(--muted)",
-          marginBottom: "0.75rem",
+          marginBottom: "8px",
           lineHeight: 1.5,
         }}
       >
@@ -67,8 +67,7 @@ export default function SignupForm({
       {status === "success" ? (
         <div
           style={{
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.85rem",
+            fontSize: "11px",
             color: "var(--success)",
           }}
         >
@@ -77,7 +76,7 @@ export default function SignupForm({
       ) : (
         <form
           onSubmit={handleSubmit}
-          style={{ display: "flex", gap: "0.5rem", maxWidth: "400px" }}
+          style={{ display: "flex", gap: "4px", maxWidth: "360px" }}
         >
           <input
             type="email"
@@ -87,13 +86,13 @@ export default function SignupForm({
             required
             style={{
               flex: 1,
-              padding: "0.5rem 0.75rem",
+              padding: "5px 7px",
               background: "var(--input-bg)",
               border: "1px solid var(--border)",
-              borderRadius: "3px",
+              borderRadius: "2px",
               color: "var(--text)",
-              fontFamily: '"JetBrains Mono", monospace',
-              fontSize: "0.85rem",
+              fontFamily: "Verdana, Geneva, sans-serif",
+              fontSize: "11px",
               outline: "none",
             }}
           />
@@ -101,14 +100,14 @@ export default function SignupForm({
             type="submit"
             disabled={status === "loading"}
             style={{
-              padding: "0.5rem 1.25rem",
-              background: "var(--accent)",
+              padding: "5px 14px",
+              background: "var(--link)",
               color: "white",
               border: "none",
-              borderRadius: "3px",
-              fontFamily: '"JetBrains Mono", monospace',
-              fontSize: "0.8rem",
-              fontWeight: 500,
+              borderRadius: "2px",
+              fontFamily: "Verdana, Geneva, sans-serif",
+              fontSize: "10px",
+              fontWeight: "bold",
               cursor: "pointer",
               whiteSpace: "nowrap",
             }}
@@ -121,10 +120,9 @@ export default function SignupForm({
       {status === "error" && (
         <div
           style={{
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.8rem",
-            color: "var(--accent)",
-            marginTop: "0.5rem",
+            fontSize: "10px",
+            color: "#c47a42",
+            marginTop: "4px",
           }}
         >
           Something went wrong. Try again.
