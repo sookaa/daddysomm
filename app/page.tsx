@@ -1,6 +1,8 @@
 import SignupForm from "@/components/SignupForm";
 
-const GLASS = `   _______
+const GLASS = `   
+
+  _________
   /          \\
  /             \\
 (               )
@@ -17,7 +19,7 @@ const GLASS = `   _______
       |
       |
      ___|___
-     /       \\`;
+     /       \\`
 
 export default function Home() {
   return (
