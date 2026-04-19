@@ -1,0 +1,35 @@
+{
+  "title": "The Wine Drops Experience",
+  "intro": "A few times a year, I put together a curated case of bottles I genuinely believe in. Here's how it works.",
+  "faqs": [
+    {
+      "question": "How often do the drops happen?",
+      "answer": "Typically three to four times a year — loosely aligned with seasons. There's no fixed schedule. When I find a collection of bottles worth sharing, I put a drop together. Subscribers get notified first."
+    },
+    {
+      "question": "Where do I need to live?",
+      "answer": "Currently available in [placeholder — add your delivery regions here]. If you're outside those areas, sign up anyway — coverage is expanding."
+    },
+    {
+      "question": "Am I buying wine from you?",
+      "answer": "No. I'm not a retailer or a licensee. I curate the selection and point you to where to buy — either directly from the producer, an importer, or a trusted shop. Think of it as a very opinionated shopping list."
+    },
+    {
+      "question": "How does it work?",
+      "answer": "When a drop is ready, you'll get an email with the full list — what's in it, why I picked it, and where to get each bottle. You buy what you want, skip what you don't. No subscriptions, no automatic charges, no commitment."
+    },
+    {
+      "question": "How much does it cost?",
+      "answer": "The drops themselves are free to receive. The wines vary in price — I try to build selections with a mix of price points, typically ranging from [placeholder] to [placeholder] per bottle. A full case usually lands around [placeholder] total."
+    },
+    {
+      "question": "What do I get besides wine?",
+      "answer": "Each drop comes with tasting notes, food pairing suggestions, and some context on the producer. I keep it readable, not clinical. Occasionally there are extras — events, group tastings, early access to something interesting."
+    },
+    {
+      "question": "Do you offer natural wine?",
+      "answer": "Yes, often. I don't fetishize the label, but I'm drawn to producers who farm carefully and intervene minimally. You'll find a mix — some certified organic, some biodynamic, some just made by people who care. The selection reflects what I'm actually drinking."
+    }
+  ],
+  "closing": "Questions not covered here? Hit the newsletter signup and ask me directly. I read everything."
+}
