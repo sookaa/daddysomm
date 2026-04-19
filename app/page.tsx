@@ -1,24 +1,25 @@
 import SignupForm from "@/components/SignupForm";
-import Link from "next/link";
 
-const GLASS = `   _______
-  /       \\
- /         \\
-(           )
-|           |
-|~~~~~~~~~~~|
-|:::::::::::|
- \\:::::::::/
-  \\:::::::/
-   \\:::::/
-    \\:::/
-     \\:/
+const GLASS = `   
+
+  _________
+  /          \\
+ /             \\
+(               )
+|               |
+|~~~~~~~~~~~~~~~|
+{:::::::::::::::}
+ \\:::::::::::://
+  \\:::::::::://
+   \\::::::://
+    \\:::://
+      \\://
       |
       |
       |
       |
-   ___|___
-  /       \\`;
+     ___|___
+     /       \\`
 
 export default function Home() {
   return (
@@ -87,7 +88,7 @@ export default function Home() {
         <SignupForm
           endpoint="/api/newsletter"
           label="The Newsletter"
-          sublabel="Notes on wine. No scores, no gatekeeping."
+          sublabel="Notes on and about wine. No scores, no gatekeeping."
           buttonText="subscribe"
           successMessage="You're in. Check your inbox."
         />
@@ -103,28 +104,9 @@ export default function Home() {
           endpoint="/api/wine-cases"
           label="Wine Case Drops"
           sublabel="Curated cases, a few times a year. This list gets first dibs."
-          buttonText="notify me"
-          successMessage="You'll hear from us when the next case drops."
+          buttonText="imbibe"
+          successMessage="You'll hear from me when the next case drops (it's coming soon)."
         />
-
-        <div
-          style={{
-            borderTop: "1px solid var(--border)",
-            margin: "0 0 1.5rem 0",
-          }}
-        />
-
-        <Link
-          href="/wine-drops"
-          style={{
-            fontFamily: "Verdana, Geneva, sans-serif",
-            fontSize: "11px",
-            color: "#cf4647",
-            textDecoration: "none",
-          }}
-        >
-          What is the wine drops experience? →
-        </Link>
       </div>
 
       <div
