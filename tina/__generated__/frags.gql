@@ -1,0 +1,11 @@
+fragment WinedropParts on Winedrop {
+  __typename
+  title
+  intro
+  faqs {
+    __typename
+    question
+    answer
+  }
+  closing
+}
