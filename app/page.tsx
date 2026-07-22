@@ -45,7 +45,7 @@ export default function Home() {
       >
         wine, irreverently
       </p>
-      
+      <a
         href="/sign-in"
         style={{
           marginTop: "2.75rem",
