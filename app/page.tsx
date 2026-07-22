@@ -1,26 +1,3 @@
-import SignupForm from "@/components/SignupForm";
-
-const GLASS = `   
-
-  _________
-  /          \\
- /             \\
-           (               )
-|               |
-|~~~~~~~~~~~~~~~|
-{:::::::::::::::}
- \\:::::::::::://
-  \\:::::::::://
-   \\::::::://
-    \\:::://
-      \\://
-      |
-      |
-      |
-      |
-     ___|___
-     /       \\`
-
 export default function Home() {
   return (
     <div
@@ -33,40 +10,26 @@ export default function Home() {
         padding: "3rem 1.5rem",
       }}
     >
-      <pre
-        style={{
-          fontFamily: '"Courier New", Courier, monospace',
-          fontSize: "13px",
-          lineHeight: 1.35,
-          color: "#cf4647",
-          textAlign: "center",
-          marginBottom: "2rem",
-          userSelect: "none",
-        }}
-      >
-        {GLASS}
-      </pre>
-
       <h1
         style={{
           fontFamily: "Verdana, Geneva, sans-serif",
-          fontSize: "24px",
+          fontSize: "clamp(40px, 9vw, 60px)",
           fontWeight: "bold",
           letterSpacing: "-0.02em",
-          marginBottom: "4px",
+          margin: 0,
           textAlign: "center",
           color: "var(--text)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "6px",
+          gap: "14px",
         }}
       >
         daddy
-        <svg viewBox="0 0 24 32" width="16" height="22" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="3" rx="1" fill="#cf4647"/>
-          <rect x="10" y="5" width="4" height="8" fill="#cf4647"/>
-          <path d="M 12,13 Q 7,15 12,18 Q 17,20 12,23 Q 7,25 12,28" fill="none" stroke="#cf4647" strokeWidth="1.8" strokeLinecap="round"/>
+        <svg viewBox="0 0 24 32" width="34" height="46" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="3" rx="1" fill="var(--link)" />
+          <rect x="10" y="5" width="4" height="8" fill="var(--link)" />
+          <path d="M 12,13 Q 7,15 12,18 Q 17,20 12,23 Q 7,25 12,28" fill="none" stroke="var(--link)" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
         somm
       </h1>
@@ -74,9 +37,9 @@ export default function Home() {
       <p
         style={{
           fontFamily: "Verdana, Geneva, sans-serif",
-          fontSize: "11px",
+          fontSize: "15px",
           color: "var(--muted)",
-          marginBottom: "2.5rem",
+          margin: "14px 0 0",
           letterSpacing: "0.03em",
           fontStyle: "italic",
         }}
@@ -84,42 +47,24 @@ export default function Home() {
         wine, irreverently
       </p>
 
-      <div style={{ width: "100%", maxWidth: "380px" }}>
-        <SignupForm
-          endpoint="/api/newsletter"
-          label="The Newsletter"
-          sublabel="Notes on and about wine. No scores, no gatekeeping."
-          buttonText="subscribe"
-          successMessage="You're in. Check your inbox."
-        />
-
-        <div
-          style={{
-            borderTop: "1px solid var(--border)",
-            margin: "0 0 2rem 0",
-          }}
-        />
-
-        <SignupForm
-          endpoint="/api/wine-cases"
-          label="Wine Case Drops"
-          sublabel="Curated cases, a few times a year. This list gets first dibs."
-          buttonText="imbibe"
-          successMessage="You'll hear from me when the next case drops (it's coming soon)."
-        />
-      </div>
-
-      <div
+      
+        href="/sign-in"
         style={{
-          marginTop: "auto",
-          paddingTop: "4rem",
-          fontFamily: "Verdana, Geneva, sans-serif",
-          fontSize: "10px",
-          color: "var(--muted)",
+          marginTop: "2.75rem",
+          display: "inline-block",
+          background: "var(--link)",
+          color: "#fff",
+          fontFamily: "Verdana, sans-serif",
+          fontSize: "15px",
+          fontWeight: "bold",
+          padding: "14px 40px",
+          borderRadius: "6px",
+          textDecoration: "none",
+          letterSpacing: "0.02em",
         }}
       >
-        drink what you like
-      </div>
+        Sign in / Sign up
+      </a>
     </div>
   );
 }
