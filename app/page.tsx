@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Home() {
   return (
     <div
@@ -35,7 +33,6 @@ export default function Home() {
         </svg>
         somm
       </h1>
-
       <p
         style={{
           fontFamily: "Verdana, Geneva, sans-serif",
@@ -48,7 +45,6 @@ export default function Home() {
       >
         wine, irreverently
       </p>
-
       
         href="/sign-in"
         style={{
