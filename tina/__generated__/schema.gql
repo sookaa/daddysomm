@@ -54,11 +54,14 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
+  drop(relativePath: String): Drop!
+  dropConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: DropFilter): DropConnection!
   winedrop(relativePath: String): Winedrop!
   winedropConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: WinedropFilter): WinedropConnection!
 }
 
 input DocumentFilter {
+  drop: DropFilter
   winedrop: WinedropFilter
 }
 
@@ -85,7 +88,83 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Winedrop | Folder
+union DocumentNode = Drop | Winedrop | Folder
+
+type DropBottles {
+  name: String!
+  producer: String
+  region: String
+  vintage: String
+  colour: String
+  isInvestment: Boolean
+}
+
+type Drop implements Node & Document {
+  title: String!
+  theme: String
+  publishDate: String!
+  confirmationDeadline: String
+  description: JSON
+  bottles: [DropBottles]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input DatetimeFilter {
+  after: String
+  before: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input DropBottlesFilter {
+  name: StringFilter
+  producer: StringFilter
+  region: StringFilter
+  vintage: StringFilter
+  colour: StringFilter
+  isInvestment: BooleanFilter
+}
+
+input DropFilter {
+  title: StringFilter
+  theme: StringFilter
+  publishDate: DatetimeFilter
+  confirmationDeadline: DatetimeFilter
+  description: RichTextFilter
+  bottles: DropBottlesFilter
+}
+
+type DropConnectionEdges {
+  cursor: String!
+  node: Drop
+}
+
+type DropConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [DropConnectionEdges]
+}
 
 type WinedropFaqs {
   question: String!
@@ -100,13 +179,6 @@ type Winedrop implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input WinedropFaqsFilter {
@@ -138,17 +210,39 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateDrop(relativePath: String!, params: DropMutation!): Drop!
+  createDrop(relativePath: String!, params: DropMutation!): Drop!
   updateWinedrop(relativePath: String!, params: WinedropMutation!): Winedrop!
   createWinedrop(relativePath: String!, params: WinedropMutation!): Winedrop!
 }
 
 input DocumentUpdateMutation {
+  drop: DropMutation
   winedrop: WinedropMutation
   relativePath: String
 }
 
 input DocumentMutation {
+  drop: DropMutation
   winedrop: WinedropMutation
+}
+
+input DropBottlesMutation {
+  name: String
+  producer: String
+  region: String
+  vintage: String
+  colour: String
+  isInvestment: Boolean
+}
+
+input DropMutation {
+  title: String
+  theme: String
+  publishDate: String
+  confirmationDeadline: String
+  description: JSON
+  bottles: [DropBottlesMutation]
 }
 
 input WinedropFaqsMutation {

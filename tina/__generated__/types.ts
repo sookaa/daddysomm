@@ -82,6 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
+  drop: Drop;
+  dropConnection: DropConnection;
   winedrop: Winedrop;
   winedropConnection: WinedropConnection;
 };
@@ -108,6 +110,21 @@ export type QueryDocumentArgs = {
 };
 
 
+export type QueryDropArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryDropConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DropFilter>;
+};
+
+
 export type QueryWinedropArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -123,6 +140,7 @@ export type QueryWinedropConnectionArgs = {
 };
 
 export type DocumentFilter = {
+  drop?: InputMaybe<DropFilter>;
   winedrop?: InputMaybe<WinedropFilter>;
 };
 
@@ -163,7 +181,87 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Winedrop | Folder;
+export type DocumentNode = Drop | Winedrop | Folder;
+
+export type DropBottles = {
+  __typename?: 'DropBottles';
+  name: Scalars['String']['output'];
+  producer?: Maybe<Scalars['String']['output']>;
+  region?: Maybe<Scalars['String']['output']>;
+  vintage?: Maybe<Scalars['String']['output']>;
+  colour?: Maybe<Scalars['String']['output']>;
+  isInvestment?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Drop = Node & Document & {
+  __typename?: 'Drop';
+  title: Scalars['String']['output'];
+  theme?: Maybe<Scalars['String']['output']>;
+  publishDate: Scalars['String']['output'];
+  confirmationDeadline?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['JSON']['output']>;
+  bottles?: Maybe<Array<Maybe<DropBottles>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type StringFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DatetimeFilter = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type DropBottlesFilter = {
+  name?: InputMaybe<StringFilter>;
+  producer?: InputMaybe<StringFilter>;
+  region?: InputMaybe<StringFilter>;
+  vintage?: InputMaybe<StringFilter>;
+  colour?: InputMaybe<StringFilter>;
+  isInvestment?: InputMaybe<BooleanFilter>;
+};
+
+export type DropFilter = {
+  title?: InputMaybe<StringFilter>;
+  theme?: InputMaybe<StringFilter>;
+  publishDate?: InputMaybe<DatetimeFilter>;
+  confirmationDeadline?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<RichTextFilter>;
+  bottles?: InputMaybe<DropBottlesFilter>;
+};
+
+export type DropConnectionEdges = {
+  __typename?: 'DropConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Drop>;
+};
+
+export type DropConnection = Connection & {
+  __typename?: 'DropConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<DropConnectionEdges>>>;
+};
 
 export type WinedropFaqs = {
   __typename?: 'WinedropFaqs';
@@ -180,13 +278,6 @@ export type Winedrop = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type StringFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type WinedropFaqsFilter = {
@@ -221,6 +312,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
+  updateDrop: Drop;
+  createDrop: Drop;
   updateWinedrop: Winedrop;
   createWinedrop: Winedrop;
 };
@@ -259,6 +352,18 @@ export type MutationCreateFolderArgs = {
 };
 
 
+export type MutationUpdateDropArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DropMutation;
+};
+
+
+export type MutationCreateDropArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DropMutation;
+};
+
+
 export type MutationUpdateWinedropArgs = {
   relativePath: Scalars['String']['input'];
   params: WinedropMutation;
@@ -271,12 +376,32 @@ export type MutationCreateWinedropArgs = {
 };
 
 export type DocumentUpdateMutation = {
+  drop?: InputMaybe<DropMutation>;
   winedrop?: InputMaybe<WinedropMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
+  drop?: InputMaybe<DropMutation>;
   winedrop?: InputMaybe<WinedropMutation>;
+};
+
+export type DropBottlesMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  producer?: InputMaybe<Scalars['String']['input']>;
+  region?: InputMaybe<Scalars['String']['input']>;
+  vintage?: InputMaybe<Scalars['String']['input']>;
+  colour?: InputMaybe<Scalars['String']['input']>;
+  isInvestment?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type DropMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  theme?: InputMaybe<Scalars['String']['input']>;
+  publishDate?: InputMaybe<Scalars['String']['input']>;
+  confirmationDeadline?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['JSON']['input']>;
+  bottles?: InputMaybe<Array<InputMaybe<DropBottlesMutation>>>;
 };
 
 export type WinedropFaqsMutation = {
@@ -291,7 +416,28 @@ export type WinedropMutation = {
   closing?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type DropPartsFragment = { __typename: 'Drop', title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null };
+
 export type WinedropPartsFragment = { __typename: 'Winedrop', title: string, intro?: string | null, closing?: string | null, faqs?: Array<{ __typename: 'WinedropFaqs', question: string, answer: string } | null> | null };
+
+export type DropQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type DropQuery = { __typename?: 'Query', drop: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } };
+
+export type DropConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DropFilter>;
+}>;
+
+
+export type DropConnectionQuery = { __typename?: 'Query', dropConnection: { __typename?: 'DropConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DropConnectionEdges', cursor: string, node?: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } | null } | null> | null } };
 
 export type WinedropQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -312,6 +458,25 @@ export type WinedropConnectionQueryVariables = Exact<{
 
 export type WinedropConnectionQuery = { __typename?: 'Query', winedropConnection: { __typename?: 'WinedropConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WinedropConnectionEdges', cursor: string, node?: { __typename: 'Winedrop', id: string, title: string, intro?: string | null, closing?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, faqs?: Array<{ __typename: 'WinedropFaqs', question: string, answer: string } | null> | null } | null } | null> | null } };
 
+export const DropPartsFragmentDoc = gql`
+    fragment DropParts on Drop {
+  __typename
+  title
+  theme
+  publishDate
+  confirmationDeadline
+  description
+  bottles {
+    __typename
+    name
+    producer
+    region
+    vintage
+    colour
+    isInvestment
+  }
+}
+    `;
 export const WinedropPartsFragmentDoc = gql`
     fragment WinedropParts on Winedrop {
   __typename
@@ -325,6 +490,63 @@ export const WinedropPartsFragmentDoc = gql`
   closing
 }
     `;
+export const DropDocument = gql`
+    query drop($relativePath: String!) {
+  drop(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...DropParts
+  }
+}
+    ${DropPartsFragmentDoc}`;
+export const DropConnectionDocument = gql`
+    query dropConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: DropFilter) {
+  dropConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...DropParts
+      }
+    }
+  }
+}
+    ${DropPartsFragmentDoc}`;
 export const WinedropDocument = gql`
     query winedrop($relativePath: String!) {
   winedrop(relativePath: $relativePath) {
@@ -385,7 +607,13 @@ export const WinedropConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      winedrop(variables: WinedropQueryVariables, options?: C): Promise<{data: WinedropQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WinedropQueryVariables, query: string}> {
+      drop(variables: DropQueryVariables, options?: C): Promise<{data: DropQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DropQueryVariables, query: string}> {
+        return requester<{data: DropQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DropQueryVariables, query: string}, DropQueryVariables>(DropDocument, variables, options);
+      },
+    dropConnection(variables?: DropConnectionQueryVariables, options?: C): Promise<{data: DropConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DropConnectionQueryVariables, query: string}> {
+        return requester<{data: DropConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DropConnectionQueryVariables, query: string}, DropConnectionQueryVariables>(DropConnectionDocument, variables, options);
+      },
+    winedrop(variables: WinedropQueryVariables, options?: C): Promise<{data: WinedropQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WinedropQueryVariables, query: string}> {
         return requester<{data: WinedropQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WinedropQueryVariables, query: string}, WinedropQueryVariables>(WinedropDocument, variables, options);
       },
     winedropConnection(variables?: WinedropConnectionQueryVariables, options?: C): Promise<{data: WinedropConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WinedropConnectionQueryVariables, query: string}> {

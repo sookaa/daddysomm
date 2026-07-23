@@ -1,3 +1,21 @@
+fragment DropParts on Drop {
+  __typename
+  title
+  theme
+  publishDate
+  confirmationDeadline
+  description
+  bottles {
+    __typename
+    name
+    producer
+    region
+    vintage
+    colour
+    isInvestment
+  }
+}
+
 fragment WinedropParts on Winedrop {
   __typename
   title
