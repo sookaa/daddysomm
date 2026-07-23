@@ -3,5 +3,14 @@
   "theme": "Wines to transition from summer to less-summer",
   "publishDate": "2026-07-24T00:00:00.000Z",
   "confirmationDeadline": "2026-07-21T00:00:00.000Z",
-  "description": "this is just a test\n"
+  "description": "this is just a test\n",
+  "bottles": [
+    {
+      "name": "bottle 1",
+      "producer": "French",
+      "region": "burgundy",
+      "colour": "red",
+      "isInvestment": true
+    }
+  ]
 }
