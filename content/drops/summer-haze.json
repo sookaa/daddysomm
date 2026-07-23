@@ -11,6 +11,13 @@
       "region": "burgundy",
       "colour": "red",
       "isInvestment": true
+    },
+    {
+      "name": "non invest",
+      "producer": "Dael",
+      "region": "Portugal",
+      "vintage": "nv",
+      "colour": "rose"
     }
   ]
 }
