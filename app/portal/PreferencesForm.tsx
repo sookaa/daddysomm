@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { savePreferences } from "./actions";
 
 interface Props {
@@ -16,7 +17,7 @@ export default function PreferencesForm(props: Props) {
   const [noSparkling, setNoSparkling] = useState(props.noSparkling);
   const [investment, setInvestment] = useState(props.investmentBottle);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const router = useRouter();
 
   const disabledStyle = defer
     ? { opacity: 0.4, pointerEvents: "none" as const }
@@ -24,10 +25,8 @@ export default function PreferencesForm(props: Props) {
 
   async function handleSubmit(formData: FormData) {
     setSaving(true);
-    setSaved(false);
     await savePreferences(formData);
-    setSaving(false);
-    setSaved(true);
+    router.push("/portal/case");
   }
 
   const rowStyle = {
@@ -110,12 +109,13 @@ export default function PreferencesForm(props: Props) {
           <strong>Add an investment bottle</strong>
           <br />
           <span style={{ color: "var(--muted)", fontSize: "13px" }}>
-            A standout bottle added to your case. Opt in to include one.
+            Swaps one of your twelve for a standout bottle. Opt in if you're
+            curious.
           </span>
         </span>
       </label>
 
-      <div style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", alignItems: "center" }}>
+      <div style={{ marginTop: "1.5rem" }}>
         <button
           type="submit"
           disabled={saving}
@@ -134,9 +134,6 @@ export default function PreferencesForm(props: Props) {
         >
           {saving ? "Saving..." : "Save preferences"}
         </button>
-        {saved && !saving && (
-          <span style={{ color: "var(--muted)", fontSize: "13px" }}>Saved.</span>
-        )}
       </div>
     </form>
   );
