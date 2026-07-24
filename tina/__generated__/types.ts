@@ -199,6 +199,7 @@ export type Drop = Node & Document & {
   theme?: Maybe<Scalars['String']['output']>;
   publishDate: Scalars['String']['output'];
   confirmationDeadline?: Maybe<Scalars['String']['output']>;
+  deliveryWindow?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['JSON']['output']>;
   bottles?: Maybe<Array<Maybe<DropBottles>>>;
   id: Scalars['ID']['output'];
@@ -246,6 +247,7 @@ export type DropFilter = {
   theme?: InputMaybe<StringFilter>;
   publishDate?: InputMaybe<DatetimeFilter>;
   confirmationDeadline?: InputMaybe<DatetimeFilter>;
+  deliveryWindow?: InputMaybe<StringFilter>;
   description?: InputMaybe<RichTextFilter>;
   bottles?: InputMaybe<DropBottlesFilter>;
 };
@@ -400,6 +402,7 @@ export type DropMutation = {
   theme?: InputMaybe<Scalars['String']['input']>;
   publishDate?: InputMaybe<Scalars['String']['input']>;
   confirmationDeadline?: InputMaybe<Scalars['String']['input']>;
+  deliveryWindow?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['JSON']['input']>;
   bottles?: InputMaybe<Array<InputMaybe<DropBottlesMutation>>>;
 };
@@ -416,7 +419,7 @@ export type WinedropMutation = {
   closing?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DropPartsFragment = { __typename: 'Drop', title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null };
+export type DropPartsFragment = { __typename: 'Drop', title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, deliveryWindow?: string | null, description?: any | null, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null };
 
 export type WinedropPartsFragment = { __typename: 'Winedrop', title: string, intro?: string | null, closing?: string | null, faqs?: Array<{ __typename: 'WinedropFaqs', question: string, answer: string } | null> | null };
 
@@ -425,7 +428,7 @@ export type DropQueryVariables = Exact<{
 }>;
 
 
-export type DropQuery = { __typename?: 'Query', drop: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } };
+export type DropQuery = { __typename?: 'Query', drop: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, deliveryWindow?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } };
 
 export type DropConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -437,7 +440,7 @@ export type DropConnectionQueryVariables = Exact<{
 }>;
 
 
-export type DropConnectionQuery = { __typename?: 'Query', dropConnection: { __typename?: 'DropConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DropConnectionEdges', cursor: string, node?: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } | null } | null> | null } };
+export type DropConnectionQuery = { __typename?: 'Query', dropConnection: { __typename?: 'DropConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DropConnectionEdges', cursor: string, node?: { __typename: 'Drop', id: string, title: string, theme?: string | null, publishDate: string, confirmationDeadline?: string | null, deliveryWindow?: string | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, bottles?: Array<{ __typename: 'DropBottles', name: string, producer?: string | null, region?: string | null, vintage?: string | null, colour?: string | null, isInvestment?: boolean | null } | null> | null } | null } | null> | null } };
 
 export type WinedropQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -465,6 +468,7 @@ export const DropPartsFragmentDoc = gql`
   theme
   publishDate
   confirmationDeadline
+  deliveryWindow
   description
   bottles {
     __typename

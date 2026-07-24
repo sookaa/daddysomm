@@ -55,6 +55,11 @@ export default defineConfig({
             label: "Confirmation Deadline (members can change until this)",
           },
           {
+            type: "string",
+            name: "deliveryWindow",
+            label: "Delivery window (free text, e.g. 'late September')",
+          },
+          {
             type: "rich-text",
             name: "description",
             label: "Description / Blurb",

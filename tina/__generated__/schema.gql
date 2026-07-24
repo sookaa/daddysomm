@@ -104,6 +104,7 @@ type Drop implements Node & Document {
   theme: String
   publishDate: String!
   confirmationDeadline: String
+  deliveryWindow: String
   description: JSON
   bottles: [DropBottles]
   id: ID!
@@ -151,6 +152,7 @@ input DropFilter {
   theme: StringFilter
   publishDate: DatetimeFilter
   confirmationDeadline: DatetimeFilter
+  deliveryWindow: StringFilter
   description: RichTextFilter
   bottles: DropBottlesFilter
 }
@@ -241,6 +243,7 @@ input DropMutation {
   theme: String
   publishDate: String
   confirmationDeadline: String
+  deliveryWindow: String
   description: JSON
   bottles: [DropBottlesMutation]
 }

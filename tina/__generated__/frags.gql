@@ -4,6 +4,7 @@ fragment DropParts on Drop {
   theme
   publishDate
   confirmationDeadline
+  deliveryWindow
   description
   bottles {
     __typename
