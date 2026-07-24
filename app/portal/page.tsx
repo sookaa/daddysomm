@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase";
+import PreferencesForm from "./PreferencesForm";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +13,7 @@ export default async function PortalPage() {
   const db = supabaseAdmin();
   const { data: profile } = await db
     .from("users")
-    .select("display_name, email, no_red, no_white, no_sparkling, investment_bottle_opt_out")
+    .select("display_name, email, defer_curation, wine_lean, no_sparkling, investment_bottle")
     .eq("clerk_user_id", user.id)
     .single();
 
@@ -46,19 +47,14 @@ export default async function PortalPage() {
         </Link>
       </p>
 
-      <h2>your preferences</h2>
+      <h2 style={{ marginBottom: "1.5rem" }}>your case preferences</h2>
       {profile ? (
-        <ul>
-          <li>No red: {profile.no_red ? "yes" : "no"}</li>
-          <li>No white: {profile.no_white ? "yes" : "no"}</li>
-          <li>No sparkling: {profile.no_sparkling ? "yes" : "no"}</li>
-          <li>
-            Investment bottle:{" "}
-            {profile.investment_bottle_opt_out
-              ? "opted out (12th regular bottle instead)"
-              : "included"}
-          </li>
-        </ul>
+        <PreferencesForm
+          deferCuration={profile.defer_curation ?? false}
+          wineLean={profile.wine_lean ?? "none"}
+          noSparkling={profile.no_sparkling ?? false}
+          investmentBottle={profile.investment_bottle ?? false}
+        />
       ) : (
         <p>
           Your profile is still syncing. Refresh in a moment — if this
@@ -66,7 +62,7 @@ export default async function PortalPage() {
         </p>
       )}
 
-      <p style={{ marginTop: "2rem" }}>
+      <p style={{ marginTop: "2.5rem" }}>
         <SignOutButton>
           <button type="button">sign out</button>
         </SignOutButton>
