@@ -92,10 +92,12 @@ export default async function CasePage() {
     .reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
 
   let lockLine: string | null = null;
+  let deadlinePassed = false;
   if (drop) {
-    const deadlinePassed =
+    deadlinePassed = !!(
       drop.confirmationDeadline &&
-      new Date(drop.confirmationDeadline).getTime() < Date.now();
+      new Date(drop.confirmationDeadline).getTime() < Date.now()
+    );
     if (deadlinePassed) {
       lockLine = `Your case for ${drop.title} is locked in. See you at delivery.`;
     } else if (drop.confirmationDeadline) {
@@ -141,8 +143,14 @@ export default async function CasePage() {
           </p>
         )}
 
+        {!deadlinePassed && (
+          <p style={{ marginTop: "1.25rem" }}>
+            <Link href="/portal">change my case</Link>
+          </p>
+        )}
+
         {drop?.deliveryWindow && (
-          <p style={{ color: "var(--muted)", marginTop: "1rem" }}>
+          <p style={{ color: "var(--muted)", marginTop: "1.5rem" }}>
             The {drop.title} drop lands {drop.deliveryWindow}.
           </p>
         )}
