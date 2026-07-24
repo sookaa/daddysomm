@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
+import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +26,25 @@ export default async function PortalPage() {
     <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
       <h1>the cellar</h1>
       <p>Welcome back, {name}.</p>
+
+      <p style={{ margin: "2rem 0" }}>
+        <Link
+          href="/drop"
+          style={{
+            display: "inline-block",
+            background: "var(--link)",
+            color: "#fff",
+            fontFamily: "Verdana, sans-serif",
+            fontSize: "15px",
+            fontWeight: "bold",
+            padding: "12px 32px",
+            borderRadius: "6px",
+            textDecoration: "none",
+          }}
+        >
+          View the current drop
+        </Link>
+      </p>
 
       <h2>your preferences</h2>
       {profile ? (
