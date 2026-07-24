@@ -37,16 +37,16 @@ function describeCase(p: {
 }): string {
   if (p.defer_curation) {
     return p.investment_bottle
-      ? "Twelve bottles, my call entirely — including one special one."
-      : "Twelve bottles, my call entirely. Brave. I'll make it count.";
+      ? "Twelve bottles, my call entirely — including one special one, chin chin!."
+      : "Twelve bottles, my call entirely. Brave. Salut!.";
   }
   const parts: string[] = [];
   if (p.wine_lean === "red") parts.push("leaning red");
   else if (p.wine_lean === "white") parts.push("leaning white");
-  else parts.push("a balanced mix");
+  else parts.push("a balanced mix, are you a libra?");
   if (!p.no_sparkling) parts.push("bubbles included");
   else parts.push("no bubbles");
-  if (p.investment_bottle) parts.push("one bottle swapped for something special");
+  if (p.investment_bottle) parts.push("one bottle swapped for something special, civilised");
   return "Twelve bottles: " + parts.join(", ") + ".";
 }
 
@@ -78,7 +78,7 @@ export default async function CasePage() {
     <main style={{ maxWidth: "44rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
       <h1 style={{ fontSize: "28px", marginBottom: "0.5rem" }}>your case</h1>
       <p style={{ color: "var(--muted)", marginBottom: "2rem" }}>
-        Noted, locked in my head, and honestly? Good choices.
+        Not bad; I can work with this!
       </p>
 
       <CaseRack
