@@ -9,8 +9,10 @@ import CaseRack from "../CaseRack";
 export const dynamic = "force-dynamic";
 
 interface DropMeta {
+  slug: string;
   title: string;
   publishDate: string;
+  confirmationDeadline?: string;
   deliveryWindow?: string;
 }
 
@@ -21,7 +23,10 @@ function getCurrentDropMeta(): DropMeta | null {
   const drops = fs
     .readdirSync(dir)
     .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf-8")) as DropMeta)
+    .map((f) => {
+      const data = JSON.parse(fs.readFileSync(path.join(dir, f), "utf-8"));
+      return { ...data, slug: f.replace(/\.json$/, "") } as DropMeta;
+    })
     .filter((d) => d.publishDate && new Date(d.publishDate).getTime() <= now)
     .sort(
       (a, b) =>
@@ -51,6 +56,14 @@ function describeCase(p: {
   return "Twelve bottles: " + parts.join(", ") + ".";
 }
 
+function fmt(d: string): string {
+  return new Date(d).toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default async function CasePage() {
   const user = await currentUser();
   if (!user) return null;
@@ -58,7 +71,7 @@ export default async function CasePage() {
   const db = supabaseAdmin();
   const { data: profile } = await db
     .from("users")
-    .select("defer_curation, wine_lean, no_sparkling, investment_bottle")
+    .select("id, defer_curation, wine_lean, no_sparkling, investment_bottle")
     .eq("clerk_user_id", user.id)
     .single();
 
@@ -77,6 +90,20 @@ export default async function CasePage() {
   const seed = user.id
     .split("")
     .reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+
+  let lockLine: string | null = null;
+  if (drop) {
+    const deadlinePassed =
+      drop.confirmationDeadline &&
+      new Date(drop.confirmationDeadline).getTime() < Date.now();
+    if (deadlinePassed) {
+      lockLine = `Your case for ${drop.title} is locked in. See you at delivery.`;
+    } else if (drop.confirmationDeadline) {
+      lockLine = `Locked in for ${drop.title} — change your mind any time before ${fmt(drop.confirmationDeadline)}.`;
+    } else {
+      lockLine = `Locked in for ${drop.title}.`;
+    }
+  }
 
   return (
     <>
@@ -98,6 +125,21 @@ export default async function CasePage() {
         <p style={{ lineHeight: 1.7, marginTop: "1.5rem" }}>
           {describeCase(profile)}
         </p>
+
+        {lockLine && (
+          <p
+            style={{
+              marginTop: "1.5rem",
+              padding: "0.9rem 1.1rem",
+              background: "var(--input-bg)",
+              border: "1px solid var(--border)",
+              borderRadius: "6px",
+              fontSize: "14px",
+            }}
+          >
+            {lockLine}
+          </p>
+        )}
 
         {drop?.deliveryWindow && (
           <p style={{ color: "var(--muted)", marginTop: "1rem" }}>
