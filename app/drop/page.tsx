@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { currentUser } from "@clerk/nextjs/server";
+import MemberNav from "@/components/MemberNav";
 
 export const dynamic = "force-dynamic";
 
@@ -57,12 +58,15 @@ export default async function DropPage() {
 
   if (!drop) {
     return (
-      <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
-        <h1 style={{ fontSize: "28px" }}>the current drop</h1>
-        <p style={{ color: "var(--muted)", marginTop: "1rem" }}>
-          No drop is live right now. Check back soon.
-        </p>
-      </main>
+      <>
+        <MemberNav />
+        <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
+          <h1 style={{ fontSize: "28px" }}>the current drop</h1>
+          <p style={{ color: "var(--muted)", marginTop: "1rem" }}>
+            No drop is live right now. Check back soon.
+          </p>
+        </main>
+      </>
     );
   }
 
@@ -70,68 +74,71 @@ export default async function DropPage() {
   const blurb = richTextToPlain(drop.description?.children ?? drop.description);
 
   return (
-    <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
-      {drop.theme && (
-        <p style={{ color: "var(--muted)", fontSize: "13px", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
-          {drop.theme}
-        </p>
-      )}
-      <h1 style={{ fontSize: "32px", margin: "0 0 1rem" }}>{drop.title}</h1>
+    <>
+      <MemberNav />
+      <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
+        {drop.theme && (
+          <p style={{ color: "var(--muted)", fontSize: "13px", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+            {drop.theme}
+          </p>
+        )}
+        <h1 style={{ fontSize: "32px", margin: "0 0 1rem" }}>{drop.title}</h1>
 
-      {blurb && (
-        <p style={{ lineHeight: 1.7, marginBottom: "2rem" }}>{blurb}</p>
-      )}
+        {blurb && (
+          <p style={{ lineHeight: 1.7, marginBottom: "2rem" }}>{blurb}</p>
+        )}
 
-      {drop.confirmationDeadline && (
-        <p style={{ color: "var(--muted)", fontSize: "13px", marginBottom: "2rem" }}>
-          Confirm your case by{" "}
-          {new Date(drop.confirmationDeadline).toLocaleDateString(undefined, {
-            weekday: "long",
-            month: "long",
-            day: "numeric",
-          })}
-          .
-        </p>
-      )}
+        {drop.confirmationDeadline && (
+          <p style={{ color: "var(--muted)", fontSize: "13px", marginBottom: "2rem" }}>
+            Confirm your case by{" "}
+            {new Date(drop.confirmationDeadline).toLocaleDateString(undefined, {
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+            })}
+            .
+          </p>
+        )}
 
-      <h2 style={{ fontSize: "18px", marginBottom: "1rem" }}>The bottles</h2>
-      {bottles.length === 0 ? (
-        <p style={{ color: "var(--muted)" }}>Bottle list coming soon.</p>
-      ) : (
-        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-          {bottles.map((b, i) => (
-            <li
-              key={i}
-              style={{
-                padding: "0.9rem 0",
-                borderBottom: "1px solid var(--border)",
-              }}
-            >
-              <span style={{ fontWeight: "bold" }}>{b.name}</span>
-              {b.isInvestment && (
-                <span
-                  style={{
-                    marginLeft: "0.5rem",
-                    fontSize: "11px",
-                    color: "var(--link)",
-                    border: "1px solid var(--link)",
-                    borderRadius: "3px",
-                    padding: "1px 5px",
-                  }}
-                >
-                  investment
+        <h2 style={{ fontSize: "18px", marginBottom: "1rem" }}>The bottles</h2>
+        {bottles.length === 0 ? (
+          <p style={{ color: "var(--muted)" }}>Bottle list coming soon.</p>
+        ) : (
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {bottles.map((b, i) => (
+              <li
+                key={i}
+                style={{
+                  padding: "0.9rem 0",
+                  borderBottom: "1px solid var(--border)",
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>{b.name}</span>
+                {b.isInvestment && (
+                  <span
+                    style={{
+                      marginLeft: "0.5rem",
+                      fontSize: "11px",
+                      color: "var(--link)",
+                      border: "1px solid var(--link)",
+                      borderRadius: "3px",
+                      padding: "1px 5px",
+                    }}
+                  >
+                    investment
+                  </span>
+                )}
+                <br />
+                <span style={{ color: "var(--muted)", fontSize: "13px" }}>
+                  {[b.producer, b.region, b.vintage, b.colour]
+                    .filter(Boolean)
+                    .join(" · ")}
                 </span>
-              )}
-              <br />
-              <span style={{ color: "var(--muted)", fontSize: "13px" }}>
-                {[b.producer, b.region, b.vintage, b.colour]
-                  .filter(Boolean)
-                  .join(" · ")}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </main>
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
+    </>
   );
 }
