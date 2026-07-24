@@ -1,69 +1,68 @@
-import { currentUser } from "@clerk/nextjs/server";
-import Link from "next/link";
-import { supabaseAdmin } from "@/lib/supabase";
-import MemberNav from "@/components/MemberNav";
-import PreferencesForm from "./PreferencesForm";
-
-export const dynamic = "force-dynamic";
-
-export default async function PortalPage() {
-  const user = await currentUser();
-  if (!user) return null; // middleware redirects before this renders
-
-  const db = supabaseAdmin();
-  const { data: profile } = await db
-    .from("users")
-    .select("display_name, email, defer_curation, wine_lean, no_sparkling, investment_bottle")
-    .eq("clerk_user_id", user.id)
-    .single();
-
-  const name =
-    profile?.display_name ||
-    user.firstName ||
-    profile?.email ||
-    "member";
-
+export default function Home() {
   return (
-    <>
-      <MemberNav />
-      <main style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
-        <h1>the cellar</h1>
-        <p>Welcome back, {name}.</p>
-
-        <p style={{ margin: "2rem 0" }}>
-          <Link
-            href="/drop"
-            style={{
-              display: "inline-block",
-              background: "var(--link)",
-              color: "#fff",
-              fontFamily: "Verdana, sans-serif",
-              fontSize: "15px",
-              fontWeight: "bold",
-              padding: "12px 32px",
-              borderRadius: "6px",
-              textDecoration: "none",
-            }}
-          >
-            View the current drop
-          </Link>
-        </p>
-
-        <h2 style={{ marginBottom: "1.5rem" }}>your case preferences</h2>
-        {profile ? (
-          <PreferencesForm
-            deferCuration={profile.defer_curation ?? false}
-            wineLean={profile.wine_lean ?? "none"}
-            noSparkling={profile.no_sparkling ?? false}
-            investmentBottle={profile.investment_bottle ?? false}
-          />
-        ) : (
-          <p>
-            Your profile is still syncing. Refresh in a moment — if this
-            persists, the Clerk webhook may not be configured.
-          </p>
-        )}
-      </main>
-    </>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "3rem 1.5rem",
+      }}
+    >
+      <h1
+        style={{
+          fontFamily: "Verdana, Geneva, sans-serif",
+          fontSize: "clamp(40px, 9vw, 60px)",
+          fontWeight: "bold",
+          letterSpacing: "-0.02em",
+          margin: 0,
+          textAlign: "center",
+          color: "var(--text)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "14px",
+        }}
+      >
+        daddy
+        <svg viewBox="0 0 24 32" width="34" height="46" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="3" rx="1" fill="var(--link)" />
+          <rect x="10" y="5" width="4" height="8" fill="var(--link)" />
+          <path d="M 12,13 Q 7,15 12,18 Q 17,20 12,23 Q 7,25 12,28" fill="none" stroke="var(--link)" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+        somm
+      </h1>
+      <p
+        style={{
+          fontFamily: "Verdana, Geneva, sans-serif",
+          fontSize: "15px",
+          color: "var(--muted)",
+          margin: "14px 0 0",
+          letterSpacing: "0.03em",
+          fontStyle: "italic",
+        }}
+      >
+        wine, irreverently
+      </p>
+      <a
+        href="/sign-in"
+        style={{
+          marginTop: "2.75rem",
+          display: "inline-block",
+          background: "var(--link)",
+          color: "#fff",
+          fontFamily: "Verdana, sans-serif",
+          fontSize: "15px",
+          fontWeight: "bold",
+          padding: "14px 40px",
+          borderRadius: "6px",
+          textDecoration: "none",
+          letterSpacing: "0.02em",
+        }}
+      >
+        Sign in / Sign up
+      </a>
+    </div>
   );
 }
