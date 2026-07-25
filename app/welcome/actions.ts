@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { syncKitOptIns } from "@/lib/kit";
 import { redirect } from "next/navigation";
 
 export async function saveOptIns(formData: FormData) {
@@ -21,6 +22,15 @@ export async function saveOptIns(formData: FormData) {
       updated_at: new Date().toISOString(),
     })
     .eq("clerk_user_id", user.id);
+
+  // Best-effort Kit sync — never blocks onboarding
+  const email = user.emailAddresses?.[0]?.emailAddress;
+  if (email) {
+    await syncKitOptIns(email, user.firstName ?? null, {
+      newsletter,
+      wineDrops,
+    });
+  }
 
   redirect("/portal");
 }
