@@ -44,6 +44,7 @@ async function upsertSubscriber(
     body: JSON.stringify({
       email_address: email,
       first_name: firstName || undefined,
+      state: "active",
     }),
   });
   if (!res.ok) return null;
