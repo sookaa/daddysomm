@@ -15,14 +15,18 @@ function buildCase(p: Props): BottleKind[] {
     return bottles;
   }
 
-  let reds = 6;
-  let whites = 6;
+  const bubbles = !p.noSparkling;
+  let reds: number;
+  let whites: number;
   if (p.wineLean === "red") {
-    reds = 9;
-    whites = 3;
+    reds = bubbles ? 7 : 8;
+    whites = 4;
   } else if (p.wineLean === "white") {
-    reds = 3;
-    whites = 9;
+    whites = bubbles ? 7 : 8;
+    reds = 4;
+  } else {
+    reds = 6;
+    whites = bubbles ? 5 : 6;
   }
 
   const bottles: BottleKind[] = [
@@ -30,11 +34,11 @@ function buildCase(p: Props): BottleKind[] {
     ...Array(whites).fill("white" as BottleKind),
   ];
 
-  if (!p.noSparkling) {
-    bottles[bottles.length - 1] = "sparkling";
+  if (bubbles) {
+    bottles.push("sparkling");
   }
   if (p.investmentBottle) {
-    bottles[bottles.length - (p.noSparkling ? 1 : 2)] = "gold";
+    bottles[bottles.length - (bubbles ? 2 : 1)] = "gold";
   }
   return bottles;
 }
