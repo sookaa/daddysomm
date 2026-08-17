@@ -19,17 +19,13 @@ export default function Home() {
     "You\u2019re entering into a standing arrangement with someone who has done the work, found the access, filtered out the noise, and made sure you feel horny after drinking the wine that DaddySomm has chosen.",
   ];
 
-  const paraStyle = (i: number) => ({
-    margin: i === 0 ? 0 : "1.1em 0 0",
-  });
-
-  const copyBlockStyle = {
+  const copyBlockStyle: React.CSSProperties = {
     maxWidth: "620px",
     fontFamily: "Verdana, Geneva, sans-serif",
     fontSize: "15px",
     lineHeight: 1.7,
     color: "var(--text)",
-    textAlign: "left" as const,
+    textAlign: "left",
   };
 
   return (
@@ -45,7 +41,7 @@ export default function Home() {
     >
       <div style={copyBlockStyle}>
         {openerCopy.map((para, i) => (
-          <p key={i} style={paraStyle(i)}>
+          <p key={i} style={{ margin: i === 0 ? 0 : "1.1em 0 0" }}>
             {para}
           </p>
         ))}
@@ -87,12 +83,12 @@ export default function Home() {
       </p>
       <div style={{ ...copyBlockStyle, marginTop: "2.5rem" }}>
         {bodyCopy.map((para, i) => (
-          <p key={i} style={paraStyle(i)}>
+          <p key={i} style={{ margin: i === 0 ? 0 : "1.1em 0 0" }}>
             {para}
           </p>
         ))}
       </div>
-      
+      <a
         href="/sign-in"
         style={{
           marginTop: "2.75rem",
