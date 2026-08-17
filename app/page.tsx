@@ -1,4 +1,37 @@
 export default function Home() {
+  const openerCopy = [
+    "There is no shortage of wine. The problem is that most of it reaches you through systems built for scale, not judgment.",
+    "The LCBO is very good at making wine available. It is less good at making the right wine visible. Familiar labels dominate the shelves, scores stand in for taste, and many of the bottles worth drinking never enter general circulation at all. They sit on importer lists, in small allocations, or on shelves in another province.",
+  ];
+
+  const bodyCopy = [
+    "DaddySomm exists in that gap.",
+    "The world\u2019s great wine regions have long since been discovered. The map is not the problem. From Ontario, access is, and access is only part of the equation.",
+    "The real work is knowing which producers are making their best wine now. Which younger winemakers are beginning to outperform established names. Which varietals are showing particularly well in a given vintage. Where quality is moving faster than price. When a celebrated bottle is worth the attention, and when the quieter one beside it will be far better at the table.",
+    "That is what DaddySomm pays attention to.",
+    "We eschew the familiar mediocrity of the LCBO shelf and work through relationships with Ontario importers and distributors to access bottles that most people will never encounter while wandering the aisles. When Ontario comes up short, we raid the SAQ for the sweet goodness of French wines that, for reasons known only to the machinery of provincial alcohol distribution, never seem to make it across the border.",
+    "This is not about finding the most obscure bottle possible; it\u2019s about judgment and fun.",
+    "Four or five times a year, as the seasons change, a case arrives. Twelve bottles, chosen with intent. Some will be immediately familiar. Others may come from producers or varietals you would not have found on your own. Every bottle earns its place.",
+    "Tell us how you drink and the case will bend to you. More red. More white. Some bubbles. Bottles for Tuesday night, bottles for a long dinner, and perhaps one or two that deserve a little patience. Or say nothing and trust the hand packing the case.",
+    "There are no tasting rituals. No vocabulary tests. No requirement to identify graphite, saddle leather, or the floor of a damp forest.",
+    "Wine is not an exam.",
+    "It is one of the small ways a meal becomes an occasion, a conversation runs longer than expected, or an ordinary evening becomes slightly less ordinary.",
+    "You\u2019re entering into a standing arrangement with someone who has done the work, found the access, filtered out the noise, and made sure you feel horny after drinking the wine that DaddySomm has chosen.",
+  ];
+
+  const paraStyle = (i: number) => ({
+    margin: i === 0 ? 0 : "1.1em 0 0",
+  });
+
+  const copyBlockStyle = {
+    maxWidth: "620px",
+    fontFamily: "Verdana, Geneva, sans-serif",
+    fontSize: "15px",
+    lineHeight: 1.7,
+    color: "var(--text)",
+    textAlign: "left" as const,
+  };
+
   return (
     <div
       style={{
@@ -10,13 +43,20 @@ export default function Home() {
         padding: "3rem 1.5rem",
       }}
     >
+      <div style={copyBlockStyle}>
+        {openerCopy.map((para, i) => (
+          <p key={i} style={paraStyle(i)}>
+            {para}
+          </p>
+        ))}
+      </div>
       <h1
         style={{
           fontFamily: "Verdana, Geneva, sans-serif",
           fontSize: "clamp(40px, 9vw, 60px)",
           fontWeight: "bold",
           letterSpacing: "-0.02em",
-          margin: 0,
+          margin: "2.5rem 0 0",
           textAlign: "center",
           color: "var(--text)",
           display: "flex",
@@ -45,7 +85,14 @@ export default function Home() {
       >
         wine, irreverently
       </p>
-      <a
+      <div style={{ ...copyBlockStyle, marginTop: "2.5rem" }}>
+        {bodyCopy.map((para, i) => (
+          <p key={i} style={paraStyle(i)}>
+            {para}
+          </p>
+        ))}
+      </div>
+      
         href="/sign-in"
         style={{
           marginTop: "2.75rem",
