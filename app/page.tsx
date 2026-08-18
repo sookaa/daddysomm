@@ -64,11 +64,11 @@ export default function Home() {
       </p>
       <div
         style={{
-          maxWidth: "620px",
-          marginTop: "5rem",
+          maxWidth: "500px",
+          marginTop: "2.5rem",
           fontFamily: "Verdana, Geneva, sans-serif",
-          fontSize: "15px",
-          lineHeight: 1.7,
+          fontSize: "12px",
+          lineHeight: 1.75,
           color: "var(--text)",
           textAlign: "left",
         }}
